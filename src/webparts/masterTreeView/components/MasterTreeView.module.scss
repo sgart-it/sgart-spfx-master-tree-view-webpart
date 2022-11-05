@@ -1,0 +1,155 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+/*
+https://docs.microsoft.com/en-us/sharepoint/dev/spfx/use-theme-colors-in-your-customizations
+
+--bodyText
+--link
+--linkHovered
+
+.\sgart-spfx-configurable-view-webpart\node_modules\office-ui-fabric-react\dist\sass\_semanticSlots.scss
+*/
+/*
+https://docs.microsoft.com/en-us/sharepoint/dev/declarative-customization/site-theming/sharepoint-site-theming-json-schema
+
+Orange theme
+{ 
+    themeDarker: '#6f2d09', 
+    themeDark: '#8d390b', 
+    themeDarkAlt: '#b5490f', 
+    themePrimary: '#ca5010',   rgb(202, 80, 16) 
+    themeSecondary: '#e55c12', 
+    themeTertiary: '#f6b28d', 
+    themeLight: '#fbdac9', 
+    themeLighter: '#fdede4', 
+    themeLighterAlt: '#fef6f1', 
+    black: '#000000', 
+    neutralDark: '#212121', 
+    neutralPrimary: '#333', 
+    neutralPrimaryAlt: '#3c3c3c', 
+    neutralSecondary: '#666666', 
+    neutralTertiary: '#a6a6a6', 
+    neutralTertiaryAlt: '#c8c8c8', 
+    neutralLight: '#eaeaea', 
+    neutralLighter: '#f4f4f4', 
+    neutralLighterAlt: '#f8f8f8', 
+    white: '#fff', 
+    neutralQuaternaryAlt: '#dadada', 
+    neutralQuaternary: '#d0d0d0', 
+    neutralSecondaryAlt: '#767676', 
+    primaryBackground: '#fff', 
+    primaryText: '#333',
+    accent: '#986f0b'
+}
+*/
+
+$themePrimary: '[theme:themePrimary, default:#dc1928]';
+$themeSecondary: '[theme:themeSecondary, default:#2488d8]';
+$themeTertiary: "[theme:themeTertiary, default:#69afe5]";
+$themeLight: "[theme:themeLight, default:#b3d6f2]";
+$themeAccent: "[theme:themeAccent, default:inherit]";
+$themeDark: "[theme:themeDark, default:#005a9e]";
+$themeDarkAlt: "[theme:themeDarkAlt, default:#106ebe]";
+$themeDarker: "[theme:themeDarker, default:#004578]";
+$white: "[theme:white, default:#fff]";
+$bodyText: "[theme:bodyText, default: #323130]";
+
+
+.masterTreeView {
+  overflow: hidden;
+  padding: 1em;
+  color: $bodyText;
+  color: var(--bodyText);
+  &.teams {
+    font-family: $ms-font-family-fallbacks;
+  }
+}
+
+
+.title {
+  @include ms-fontSize-xl;
+  @include ms-fontWeight-semibold;
+  text-align: left;
+  color: $bodyText;
+  color: var(--bodyText);
+  margin: 0 0 10px 0;
+}
+
+.title2 {
+  @include ms-fontSize-l;
+  @include ms-fontWeight-semibold;
+  text-align: left;
+  color: $bodyText;
+  color: var(--bodyText);
+  margin: 0 0 10px 0;
+}
+
+.debugInfo {
+  margin-top: 20px;
+}
+
+.masterWrapper {
+  color: $white;
+  background-color: $themePrimary;
+  padding: 16px 10px;
+}
+
+.grid {
+  @include ms-Grid;
+  padding: 0;
+}
+
+.gridRow {
+  @include ms-Grid-row;
+  padding: 0;
+}
+
+
+.gridCol1 {
+  @include ms-Grid-col;
+  @include ms-sm12;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.gridCol2 {
+  @include ms-Grid-col;
+  @include ms-xl6;
+  @include ms-sm12;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.gridCol3 {
+  @include ms-Grid-col;
+  @include ms-xl4;
+  @include ms-sm12;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.gridCol4 {
+  @include ms-Grid-col;
+  @include ms-xl3;
+  @include ms-sm12;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.gridCol5 {
+  @include ms-Grid-col;
+  @include ms-sm12;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  @media (min-width: 1024px) {
+      width: 20%;
+  }
+}
+
+.gridCol6 {
+  @include ms-Grid-col;
+  @include ms-xl2;
+  @include ms-sm12;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}

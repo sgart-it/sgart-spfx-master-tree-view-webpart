@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "sgart-spfx-master-tree-view-webpart-client-side-solution",
+    "id": "420d0669-0ef6-4c49-a1f2-7ec163613bfd",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.15.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "sgart-spfx-master-tree-view-webpart description"
+      },
+      "longDescription": {
+        "default": "sgart-spfx-master-tree-view-webpart description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "sgart-spfx-master-tree-view-webpart Feature",
+        "description": "The feature that activates elements of the sgart-spfx-master-tree-view-webpart solution.",
+        "id": "9c9b7ac2-ff06-40fc-b834-9fea28661345",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/sgart-spfx-master-tree-view-webpart.sppkg"
+  }
+}

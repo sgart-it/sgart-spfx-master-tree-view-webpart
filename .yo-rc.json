@@ -1,0 +1,16 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.15.2",
+    "libraryName": "sgart-spfx-master-tree-view-webpart",
+    "libraryId": "420d0669-0ef6-4c49-a1f2-7ec163613bfd",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "sgart-spfx-master-tree-view-webpart",
+    "solutionShortDescription": "sgart-spfx-master-tree-view-webpart description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

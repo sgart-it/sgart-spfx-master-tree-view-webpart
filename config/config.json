@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "master-tree-view-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/masterTreeView/MasterTreeViewWebPart.js",
+          "manifest": "./src/webparts/masterTreeView/MasterTreeViewWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "MasterTreeViewWebPartStrings": "lib/webparts/masterTreeView/loc/{locale}.js"
+  }
+}
