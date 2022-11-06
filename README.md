@@ -51,7 +51,7 @@ Per testare l'esempio creare 3 liste SharePoint
 ### Comuni
 
 - Title (Single line of text)
-- CodErariale (Single line of text)
+- CAP (Single line of text)
 - Provincia (lookup to Province)
 
 ## Screenshot
