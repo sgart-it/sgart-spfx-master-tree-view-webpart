@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styles from './MasterTreeView.module.scss';
-import { MessageBar, MessageBarType, Separator } from 'office-ui-fabric-react';
+import { MessageBar, MessageBarType } from 'office-ui-fabric-react';
 import { IMasterTreeViewProps } from './IMasterTreeViewProps';
 import { IMasterTreeViewState } from './IMasterTreeViewState';
 import { escape } from '@microsoft/sp-lodash-subset';
@@ -11,7 +11,7 @@ import { isNullOrWhiteSpace } from '../Helper';
 import { IResult } from '../data/IResult';
 import { IMasterItem } from '../data/IMasterItem';
 import { IDetailItem } from '../data/IDetailItem';
-import { ViewMode } from './ViewMode';
+import { ViewModeEnum } from './ViewModeEnum';
 
 const VERSION = "1.2022-11-05";
 
@@ -49,9 +49,6 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
       viewMode,
 
       webRelativeUrl,
-      masterListName,
-      detailsListName,
-      detailsMasterFieldName,
       queryStringName,
 
       idMaster,
@@ -81,8 +78,6 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
 
         {showMaster && <Master item={masterItem} loading={masterLoading} />}
 
-        {showMaster && showDetails && <Separator />}
-
         {showDetails && <Details details={detailItems} loading={detailsLoading} onToggleClick={this.onToggleClick} />}
 
         {isPropertyPaneOpen && (
@@ -95,11 +90,8 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
             <div>Version: {VERSION}</div>
             <div>Author: <a href="https://www.sgart.it?SPFxMasterDetails" target="_blank" rel="noreferrer">Sgart.it</a></div>
             <hr />
-            <div>viewMode: <strong>{(ViewMode as any)[viewMode]} ({viewMode})</strong></div>
+            <div>viewMode: <strong>{(ViewModeEnum as any)[viewMode]} ({viewMode})</strong></div>
             <div>webUrl: <strong>{escape(webRelativeUrl)}</strong></div>
-            <div>masterListName: <strong>{escape(masterListName)}</strong></div>
-            <div>detailsListName: <strong>{escape(detailsListName)}</strong></div>
-            <div>detailsMasterFieldName: <strong>{escape(detailsMasterFieldName)}</strong></div>
             <div>queryStringName: <strong>{escape(queryStringName)} = <strong>{idMaster}</strong></strong></div>
           </MessageBar>
         )}
@@ -116,9 +108,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
       prevProps.title !== this.props.title ||
       prevProps.detailsTitle !== this.props.detailsTitle ||
       prevProps.viewMode !== this.props.viewMode ||
-      prevProps.webRelativeUrl !== this.props.webRelativeUrl ||
-      prevProps.masterListName !== this.props.masterListName ||
-      prevProps.detailsListName !== this.props.detailsListName ||
+      prevProps.expandAll !== this.props.expandAll ||
       prevProps.queryStringName !== this.props.queryStringName
     ) {
       await this.loadItems();
@@ -126,10 +116,10 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
   }
 
   private async loadItems(): Promise<void> {
-    const { viewMode, webRelativeUrl, masterListName, idMaster } = this.props;
+    const { viewMode, webRelativeUrl, idMaster } = this.props;
 
-    const showMaster = viewMode === ViewMode.MasterAndDetails || viewMode === ViewMode.Master;
-    const showDetails = viewMode === ViewMode.MasterAndDetails || viewMode === ViewMode.Details;
+    const showMaster = viewMode === ViewModeEnum.MasterAndDetails || viewMode === ViewModeEnum.Master;
+    const showDetails = viewMode === ViewModeEnum.MasterAndDetails || viewMode === ViewModeEnum.Details;
 
     try {
       this.setState({
@@ -140,7 +130,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
       });
 
       if (showMaster === true) {
-        this.loadItemMaster(webRelativeUrl, masterListName, idMaster);
+        this.loadItemMaster(webRelativeUrl, idMaster);
       }
 
 
@@ -160,10 +150,10 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
     }
   }
 
-  private loadItemMaster(webRelativeUrl: string, listName: string, idMaster: number): void {
+  private loadItemMaster(webRelativeUrl: string, idMaster: number): void {
     console.log("getMaster");
 
-    getMaster(webRelativeUrl, listName, idMaster)
+    getMaster(webRelativeUrl, idMaster)
       .then((result: IResult<IMasterItem>) => {
         this.setState({
           masterLoading: false,
@@ -184,7 +174,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
   private loadItemDetails(webRelativeUrl: string, idMaster: number): void {
     console.log("getDetails");
 
-    getDetails(webRelativeUrl, idMaster)
+    getDetails(webRelativeUrl, idMaster, this.props.expandAll)
       .then((result: IResult<IDetailItem[]>) => {
         this.setState({
           detailsLoading: true,

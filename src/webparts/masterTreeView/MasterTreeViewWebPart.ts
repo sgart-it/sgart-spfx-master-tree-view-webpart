@@ -3,6 +3,7 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
+  PropertyPaneCheckbox,
   PropertyPaneDropdown,
   PropertyPaneLink,
   PropertyPaneTextField
@@ -14,8 +15,9 @@ import * as strings from 'MasterTreeViewWebPartStrings';
 import MasterTreeView from './components/MasterTreeView';
 import { IMasterTreeViewProps } from './components/IMasterTreeViewProps';
 import { initDataService } from './data/DataService';
-import { ViewMode } from './components/ViewMode';
+import { ViewModeEnum } from './components/ViewModeEnum';
 import { IMasterTreeViewWebPartProps } from './IMasterTreeViewWebPartProps';
+import { getQuerystring } from './Helper';
 
 
 export default class MasterTreeViewWebPart extends BaseClientSideWebPart<IMasterTreeViewWebPartProps> {
@@ -32,9 +34,10 @@ export default class MasterTreeViewWebPart extends BaseClientSideWebPart<IMaster
   }
 
   public render(): void {
-    const params = new URLSearchParams(document.location.search);
+    //const params = new URLSearchParams(document.location.search);
     // attenzione il parametro in query string è case sensitive
-    const idMaster = Number(params.get(this.properties.queryStringName));
+    //const idMaster = Number(params.get(this.properties.queryStringName));
+    const idMaster = Number(getQuerystring(this.properties.queryStringName));
     const props = this.properties;
     
     const element: React.ReactElement<IMasterTreeViewProps> = React.createElement(
@@ -44,12 +47,10 @@ export default class MasterTreeViewWebPart extends BaseClientSideWebPart<IMaster
 
         title: props.webpartTitle,
         detailsTitle: props.detailsTitle,
-        viewMode: (ViewMode as any)[this.properties.viewMode],
+        viewMode: (ViewModeEnum as any)[props.viewMode],
+        expandAll: props.expandAll,
 
         webRelativeUrl: props.webRelativeUrl,
-        masterListName: props.masterListName,
-        detailsListName: props.detailsListName,
-        detailsMasterFieldName: props.detailsMasterFieldName,
         queryStringName: props.queryStringName,
 
         idMaster: idMaster,
@@ -103,7 +104,7 @@ export default class MasterTreeViewWebPart extends BaseClientSideWebPart<IMaster
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     this.render();  // force render
 
-    const viewModeOptions = Object.keys(ViewMode)
+    const viewModeOptions = Object.keys(ViewModeEnum)
       .filter((v) => isNaN(Number(v)))
       .map(item => { return { key: item, text: item } });
 
@@ -125,6 +126,9 @@ export default class MasterTreeViewWebPart extends BaseClientSideWebPart<IMaster
                   label: strings.ViewModeLabel,
                   options: viewModeOptions
                 }),
+                PropertyPaneCheckbox('expandAll',{
+                  text: strings.ExpandAllLabel
+                })
               ]
             },
             {
@@ -133,18 +137,6 @@ export default class MasterTreeViewWebPart extends BaseClientSideWebPart<IMaster
                 PropertyPaneTextField('webRelativeUrl', {
                   label: strings.WebRelativeUrlLabel,
                   description: strings.WebRelativeUrlDescription
-                }),
-                PropertyPaneTextField('masterListName', {
-                  label: strings.MasterListNameLabel,
-                  description: strings.ListNameDescription
-                }),
-                PropertyPaneTextField('detailsListName', {
-                  label: strings.DetailsListNameLabel,
-                  description: strings.ListNameDescription
-                }),
-                PropertyPaneTextField('detailsMasterFieldName', {
-                  label: strings.DetailsMasterFieldNameLabel,
-                  description: strings.DetailsMasterFieldNameDescription
                 }),
                 PropertyPaneTextField('queryStringName', {
                   label: strings.QueryStringNameLabel,

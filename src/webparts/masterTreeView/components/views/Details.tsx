@@ -28,19 +28,19 @@ export default class Details extends React.Component<IDetailsViewProps, {}> {
     return (
       <>
         {loading && <Spinner size={SpinnerSize.xSmall} />}
+        <ul className={styles.details}>
+          {details.map(detail => {
 
-        {details.map(detail => {
+            const noItems = details === undefined || details.length === 0;
 
-          const noItems = details === undefined || details.length === 0;
+            const chevronIcon: IIconProps = {
+              iconName: detail.show ? "ChevronDown" : "ChevronRight",
+            };
 
-          const chevronIcon: IIconProps = {
-            iconName: detail.show ? "ChevronDown" : "ChevronRight",
-          };
+            return (
 
-          return (
-            <ul key={detail.id} className={styles.details}>
-              <li>
-                <div className={styles.detail}>
+              <li key={detail.id} className={styles.detail}>
+                <div className={styles.detailHeader}>
                   <IconButton iconProps={chevronIcon} checked={false} onClick={() => this.props.onToggleClick(detail.id)} />
                   <span className={styles.title2}>{detail.title}</span> ({detail.codProvincia})
                   {loading === true && <Spinner size={SpinnerSize.xSmall} />}
@@ -50,9 +50,10 @@ export default class Details extends React.Component<IDetailsViewProps, {}> {
                   ? <div>no items</div>
                   : detail.show === true && <Items items={detail.items} />}
               </li>
-            </ul>
-          );
-        })}
+
+            );
+          })}
+        </ul>
       </>
     );
   }

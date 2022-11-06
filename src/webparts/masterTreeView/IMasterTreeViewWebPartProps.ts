@@ -2,10 +2,8 @@ export interface IMasterTreeViewWebPartProps {
     webpartTitle: string;
     detailsTitle: string;
     viewMode: string;
+    expandAll: boolean;
     
     webRelativeUrl: string;
-    masterListName: string;
-    detailsListName: string;
-    detailsMasterFieldName: string;
     queryStringName: string;
 }

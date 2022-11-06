@@ -1,4 +1,4 @@
-export enum ViewMode {
+export enum ViewModeEnum {
     MasterAndDetails,
     Master,
     Details

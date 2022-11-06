@@ -1,15 +1,13 @@
-import { ViewMode } from "./ViewMode";
+import { ViewModeEnum } from "./ViewModeEnum";
 
 export interface IMasterTreeViewProps {
   title: string;
   detailsTitle: string;
-  viewMode: ViewMode;
+  viewMode: ViewModeEnum;
+  expandAll: boolean;
   isPropertyPaneOpen: boolean;
 
   webRelativeUrl: string;
-  masterListName: string;
-  detailsListName: string;
-  detailsMasterFieldName: string;
   queryStringName: string;
 
   idMaster: number;

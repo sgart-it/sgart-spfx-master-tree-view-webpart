@@ -25,10 +25,8 @@
       "webpartTitle": "Regione",
       "detailsTitle": "Province",
       "viewMode": "MasterAndDetails",
+      "expandAll": true,
       "webRelativeUrl": "",
-      "masterListName": "Regioni",
-      "detailsListName": "Province",
-      "detailsMasterFieldName": "RegioneId",
       "queryStringName": "idMaster"
     }
   }]

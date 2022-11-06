@@ -11,14 +11,10 @@ declare interface IMasterTreeViewWebPartStrings {
 
   WebPartTitleLabel: string;
   ViewModeLabel: string;
+  ExpandAllLabel: string;
   
   WebRelativeUrlLabel: string;
   WebRelativeUrlDescription: string;
-  MasterListNameLabel: string;
-  ListNameDescription: string;
-  DetailsListNameLabel: string;
-  DetailsMasterFieldNameLabel: string;
-  DetailsMasterFieldNameDescription: string;
 
   QueryStringNameLabel: string;
   QueryStringNameDescription: string;

@@ -112,7 +112,7 @@ export const initDataService = (context: WebPartContext): void => {
 };
 
 
-export async function getMaster(webRelativeUrl: string, listName: string, idMaster: number): Promise<IResult<IMasterItem>> {
+export async function getMaster(webRelativeUrl: string, idMaster: number): Promise<IResult<IMasterItem>> {
     const result: IResult<IMasterItem> = {
         success: false,
         data: {
@@ -123,6 +123,8 @@ export async function getMaster(webRelativeUrl: string, listName: string, idMast
         error: 'not initialized',
         url: ''
     };
+
+    const listName: string = "Regioni";
 
     try {
         // TODO: per questioni di performance indicare nella "$select=" solo i campi necessari
@@ -163,7 +165,7 @@ export async function getMaster(webRelativeUrl: string, listName: string, idMast
     return result;
 }
 
-export async function getDetails(webRelativeUrl: string, idMaster: number): Promise<IResult<IDetailItem[]>> {
+export async function getDetails(webRelativeUrl: string, idMaster: number, show: boolean): Promise<IResult<IDetailItem[]>> {
     const result: IResult<IDetailItem[]> = {
         success: false,
         data: [],
@@ -200,7 +202,7 @@ export async function getDetails(webRelativeUrl: string, idMaster: number): Prom
                         codProvincia: getString(item, "CodProvincia"),
                         modified: getDate(item, "Modified", "datetime"),
                         items: [],
-                        show: true
+                        show: show
                     };
                 });
                 result.success = true;
