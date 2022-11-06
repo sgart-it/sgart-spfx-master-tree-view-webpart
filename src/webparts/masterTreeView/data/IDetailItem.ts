@@ -6,4 +6,5 @@ export interface IDetailItem {
     codProvincia: string;
     modified: string;
     items: ISubDetailItem[];
+    show: boolean;
 }

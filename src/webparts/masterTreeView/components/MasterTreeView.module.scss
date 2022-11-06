@@ -59,6 +59,7 @@ $bodyText: "[theme:bodyText, default: #323130]";
   padding: 1em;
   color: $bodyText;
   color: var(--bodyText);
+
   &.teams {
     font-family: $ms-font-family-fallbacks;
   }
@@ -142,7 +143,7 @@ $bodyText: "[theme:bodyText, default: #323130]";
   padding-bottom: 5px;
 
   @media (min-width: 1024px) {
-      width: 20%;
+    width: 20%;
   }
 }
 
@@ -152,4 +153,33 @@ $bodyText: "[theme:bodyText, default: #323130]";
   @include ms-sm12;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.details {
+  list-style: none;
+  padding: 0;
+}
+
+.detail {
+  padding: 0;
+}
+
+.items {
+  padding: 0 0 0 50px;
+}
+
+.itemsTable {
+  width: 100%;
+}
+
+.itemsTitle {
+  width: 80%;
+}
+
+.itemsCap {
+  width: 10%;
+}
+
+.itemsLink {
+  width: 10%;
 }

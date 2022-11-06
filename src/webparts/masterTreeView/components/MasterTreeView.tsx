@@ -41,12 +41,11 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
       showDialogMessage: null
     };
   }
- 
+
   public render(): React.ReactElement<IMasterTreeViewProps> {
     const {
       isPropertyPaneOpen,
       title,
-      detailsTitle,
       viewMode,
 
       webRelativeUrl,
@@ -64,7 +63,6 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
     const { masterLoading, detailsLoading, showMaster, showDetails, masterItem, detailItems } = this.state;
 
     const isTitleVisible = !isNullOrWhiteSpace(title);
-    const isDetailsTitleVisible = !isNullOrWhiteSpace(detailsTitle);
 
     return (
       <section className={`${styles.masterTreeView} ${hasTeamsContext ? styles.teams : ''}`}>
@@ -85,13 +83,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
 
         {showMaster && showDetails && <Separator />}
 
-        {showMaster && showDetails && isDetailsTitleVisible && (
-          <div className={styles.title2}>
-            <span role="heading">{escape(detailsTitle)}</span>
-          </div>
-        )}
-
-        {showDetails && <Details items={detailItems} loading={detailsLoading} onButtonClick={this.onButtonClick} />}
+        {showDetails && <Details details={detailItems} loading={detailsLoading} onToggleClick={this.onToggleClick} />}
 
         {isPropertyPaneOpen && (
           <MessageBar
@@ -199,7 +191,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
           detailItems: result.data || [],
           error: result.error,
           masterUrl: result.url
-        }, ()=> this.loadItemSubDetails(webRelativeUrl));
+        }, () => this.loadItemSubDetails(webRelativeUrl));
       })
       .catch(error => {
         this.setState({
@@ -231,8 +223,16 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
       })
   }
 
-  private onButtonClick = (event: any, id: number): void => {
-    // TODO: gestire l'azione se serve
-    alert(`Id: ${id} TODO`);
+  private onToggleClick = (idDetail: number): void => {
+    const { detailItems } = this.state;
+
+    var found = detailItems.filter(x => x.id === idDetail);
+
+    if (found !== undefined) {
+      found[0].show = !found[0].show;
+
+      this.setState({ detailItems: detailItems });
+    }
+
   }
 }

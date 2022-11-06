@@ -199,7 +199,8 @@ export async function getDetails(webRelativeUrl: string, idMaster: number): Prom
                         title: isNullOrWhiteSpace(title) || title === '-' ? '' : title,
                         codProvincia: getString(item, "CodProvincia"),
                         modified: getDate(item, "Modified", "datetime"),
-                        items: []
+                        items: [],
+                        show: true
                     };
                 });
                 result.success = true;

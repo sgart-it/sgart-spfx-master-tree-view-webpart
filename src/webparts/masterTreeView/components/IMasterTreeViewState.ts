@@ -1,3 +1,4 @@
+
 import { IDetailItem } from "../data/IDetailItem";
 import { IMasterItem } from "../data/IMasterItem";
 
@@ -19,4 +20,6 @@ export interface IMasterTreeViewState {
 
   showDialog: boolean,
   showDialogMessage: string;
+
+
 }
