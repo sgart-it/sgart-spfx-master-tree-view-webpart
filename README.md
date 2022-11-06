@@ -56,9 +56,7 @@ Per testare l'esempio creare 3 liste SharePoint
 
 ## Screenshot
 
-![Dati di esempio](images/sgart-spfx-md-01.png)
-
-![Screenshot](images/sgart-spfx-md-02.png)
+![Screenshot](images/sgart-spfx-mt-01.png)
 
 ## Links
 

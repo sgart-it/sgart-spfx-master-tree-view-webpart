@@ -12,7 +12,6 @@ define([], function() {
 
 
     "WebPartTitleLabel": "Web part title",
-    "DetailsTitleLabel": "Details title",
     "ViewModeLabel": "View mode",
     
     "WebRelativeUrlLabel": "Web relative url",

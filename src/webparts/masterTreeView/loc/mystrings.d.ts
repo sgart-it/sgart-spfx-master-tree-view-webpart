@@ -9,9 +9,7 @@ declare interface IMasterTreeViewWebPartStrings {
   SourceGroupName: string;
   AboutGroupName: string;
 
-
   WebPartTitleLabel: string;
-  DetailsTitleLabel: string;
   ViewModeLabel: string;
   
   WebRelativeUrlLabel: string;
@@ -24,7 +22,6 @@ declare interface IMasterTreeViewWebPartStrings {
 
   QueryStringNameLabel: string;
   QueryStringNameDescription: string;
-
 }
 
 declare module 'MasterTreeViewWebPartStrings' {

@@ -226,7 +226,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
   private onToggleClick = (idDetail: number): void => {
     const { detailItems } = this.state;
 
-    var found = detailItems.filter(x => x.id === idDetail);
+    const found = detailItems.filter(x => x.id === idDetail);
 
     if (found !== undefined) {
       found[0].show = !found[0].show;

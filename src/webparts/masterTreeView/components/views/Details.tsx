@@ -41,8 +41,8 @@ export default class Details extends React.Component<IDetailsViewProps, {}> {
             <ul key={detail.id} className={styles.details}>
               <li>
                 <div className={styles.detail}>
-                  <IconButton iconProps={chevronIcon} checked={detail.show} onClick={() => this.props.onToggleClick(detail.id)} />
-                  <span className={styles.title2}>{detail.title}</span>
+                  <IconButton iconProps={chevronIcon} checked={false} onClick={() => this.props.onToggleClick(detail.id)} />
+                  <span className={styles.title2}>{detail.title}</span> ({detail.codProvincia})
                   {loading === true && <Spinner size={SpinnerSize.xSmall} />}
                 </div>
 

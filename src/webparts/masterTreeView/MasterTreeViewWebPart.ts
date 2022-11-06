@@ -121,9 +121,6 @@ export default class MasterTreeViewWebPart extends BaseClientSideWebPart<IMaster
                 PropertyPaneTextField('webpartTitle', {
                   label: strings.WebPartTitleLabel
                 }),
-                PropertyPaneTextField('detailsTitle', {
-                  label: strings.DetailsTitleLabel
-                }),
                 PropertyPaneDropdown('viewMode', {
                   label: strings.ViewModeLabel,
                   options: viewModeOptions
