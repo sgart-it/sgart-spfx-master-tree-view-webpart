@@ -4,7 +4,7 @@ import { IMasterItem } from "../data/IMasterItem";
 
 export interface IMasterTreeViewState {
   success: boolean;
-  error: string;
+  errors: string[];
 
   masterLoading: boolean;
   detailsLoading: boolean;

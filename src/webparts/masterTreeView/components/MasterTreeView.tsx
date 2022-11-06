@@ -32,7 +32,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
       masterItem: undefined,
       detailItems: [],
 
-      error: undefined,
+      errors: [],
 
       masterUrl: "",
       detailsUrl: "",
@@ -70,11 +70,17 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
           </div>
         )}
 
-        {!isNullOrWhiteSpace(this.state.error) && (
-          <MessageBar messageBarType={MessageBarType.error} isMultiline={true}>
-            {this.state.error}
-          </MessageBar>
-        )}
+        {this.state.errors.length > 0 &&
+          <div>
+            {this.state.errors.map((error, index) => {
+              return (
+                <MessageBar messageBarType={MessageBarType.error} isMultiline={true} key={index}>
+                  {error}
+                </MessageBar>
+              );
+            })}
+          </div>
+        }
 
         {showMaster && <Master item={masterItem} loading={masterLoading} />}
 
@@ -126,13 +132,13 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
         masterLoading: showMaster,
         detailsLoading: showDetails,
         showMaster: showMaster,
-        showDetails: showDetails
+        showDetails: showDetails,
+        errors: []
       });
 
       if (showMaster === true) {
         this.loadItemMaster(webRelativeUrl, idMaster);
       }
-
 
       if (showDetails === true) {
         this.loadItemDetails(webRelativeUrl, idMaster);
@@ -144,7 +150,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
         detailsLoading: false,
         success: false,
         masterItem: undefined,
-        error: error,
+        errors: this.state.errors.concat(error),
         masterUrl: ""
       });
     }
@@ -158,15 +164,18 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
         this.setState({
           masterLoading: false,
           masterItem: result.data,
-          error: result.error,
           masterUrl: result.url
         });
+
+        if (result.error) {
+          this.setState({ errors: this.state.errors.concat(result.error) });
+        }
       })
       .catch(error => {
         this.setState({
           masterLoading: false,
           masterItem: undefined,
-          error: error
+          errors: this.state.errors.concat(error)
         });
       });
   }
@@ -179,15 +188,18 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
         this.setState({
           detailsLoading: true,
           detailItems: result.data || [],
-          error: result.error,
           masterUrl: result.url
         }, () => this.loadItemSubDetails(webRelativeUrl));
+
+        if (result.error) {
+          this.setState({ errors: this.state.errors.concat(result.error) });
+        }
       })
       .catch(error => {
         this.setState({
           detailsLoading: false,
           detailItems: [],
-          error: error
+          errors: this.state.errors.concat(error)
         });
       })
   }
@@ -200,15 +212,19 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
         this.setState({
           detailsLoading: false,
           detailItems: result.data || [],
-          error: result.error,
           masterUrl: result.url
         });
+
+        if (result.error) {
+          this.setState({ errors: this.state.errors.concat(result.error) });
+        }
+
       })
       .catch(error => {
         this.setState({
           detailsLoading: false,
           detailItems: [],
-          error: error
+          errors: error
         });
       })
   }
