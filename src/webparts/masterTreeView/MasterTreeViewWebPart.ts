@@ -14,7 +14,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'MasterTreeViewWebPartStrings';
 import MasterTreeView from './components/MasterTreeView';
 import { IMasterTreeViewProps } from './components/IMasterTreeViewProps';
-import { initDataService } from './data/DataService';
+import { Data } from './data/DataService';
 import { ViewModeEnum } from './components/ViewModeEnum';
 import { IMasterTreeViewWebPartProps } from './IMasterTreeViewWebPartProps';
 import { getQuerystring } from './Helper';
@@ -28,7 +28,7 @@ export default class MasterTreeViewWebPart extends BaseClientSideWebPart<IMaster
   protected onInit(): Promise<void> {
     this._environmentMessage = this._getEnvironmentMessage();
 
-    initDataService(this.context);
+    Data.initDataService(this.context);
 
     return super.onInit();
   }

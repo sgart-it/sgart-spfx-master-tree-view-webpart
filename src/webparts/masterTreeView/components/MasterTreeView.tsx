@@ -6,14 +6,13 @@ import { IMasterTreeViewState } from './IMasterTreeViewState';
 import { escape } from '@microsoft/sp-lodash-subset';
 import Master from './views/Master';
 import Details from './views/Details';
-import { getMaster, getDetails, getSubDetails } from '../data/DataService';
+import { Data } from '../data/DataService';
 import { isNullOrWhiteSpace } from '../Helper';
 import { IResult } from '../data/IResult';
 import { IMasterItem } from '../data/IMasterItem';
 import { IDetailItem } from '../data/IDetailItem';
 import { ViewModeEnum } from './ViewModeEnum';
-
-const VERSION = "1.2022-11-05";
+import { Constants } from '../Contants';
 
 export default class MasterTreeView extends React.Component<IMasterTreeViewProps, IMasterTreeViewState> {
 
@@ -93,8 +92,8 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
             className={styles.debugInfo}
           >
             <div>Enviroment: {environmentMessage}</div>
-            <div>Version: {VERSION}</div>
-            <div>Author: <a href="https://www.sgart.it?SPFxMasterDetails" target="_blank" rel="noreferrer">Sgart.it</a></div>
+            <div>Version: {Constants.VERSION}</div>
+            <div>Author: <a href="https://www.sgart.it?SPFxMasterTreeView" target="_blank" rel="noreferrer">Sgart.it</a></div>
             <hr />
             <div>viewMode: <strong>{(ViewModeEnum as any)[viewMode]} ({viewMode})</strong></div>
             <div>webUrl: <strong>{escape(webRelativeUrl)}</strong></div>
@@ -159,7 +158,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
   private loadItemMaster(webRelativeUrl: string, idMaster: number): void {
     console.log("getMaster");
 
-    getMaster(webRelativeUrl, idMaster)
+    Data.getMaster(webRelativeUrl, idMaster)
       .then((result: IResult<IMasterItem>) => {
         this.setState({
           masterLoading: false,
@@ -183,7 +182,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
   private loadItemDetails(webRelativeUrl: string, idMaster: number): void {
     console.log("getDetails");
 
-    getDetails(webRelativeUrl, idMaster, this.props.expandAll)
+    Data.getDetails(webRelativeUrl, idMaster, this.props.expandAll)
       .then((result: IResult<IDetailItem[]>) => {
         this.setState({
           detailsLoading: true,
@@ -207,7 +206,7 @@ export default class MasterTreeView extends React.Component<IMasterTreeViewProps
   private loadItemSubDetails(webRelativeUrl: string): void {
     console.log("getSubDetails");
 
-    getSubDetails(webRelativeUrl, this.state.detailItems)
+    Data.getSubDetails(webRelativeUrl, this.state.detailItems)
       .then((result: IResult<IDetailItem[]>) => {
         this.setState({
           detailsLoading: false,
